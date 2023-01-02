@@ -1,0 +1,12 @@
+{{ define "body_classes" }}page-home{{ end }}
+
+{{ define "main" }}
+  {{ $paginator := .Paginate (where .Site.RegularPages "Type" "in" (slice "zeichnungen")) }}
+    {{ range $paginator.Pages }}
+      {{ .Render "zeichnungen_summary" }}
+    {{ end }}
+    {{ partial "paginator" . }}
+  {{ end }}
+
+{{ define "footer_js" }}
+{{ end }}

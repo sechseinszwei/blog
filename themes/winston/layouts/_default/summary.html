@@ -1,0 +1,34 @@
+{{ $jahr := .PublishDate.Format "2006" }}
+{{ $zeit := .Date | time.Format "15:04" }}
+<div class="summary">
+	{{ if .PublishDate }}
+		<div class="summary-date">
+			{{ .PublishDate.Format "2." }} {{ index .Site.Data.monate (.PublishDate.Format "1")}} {{ if le $jahr "2022" }}'{{ .PublishDate.Format "06"}}{{ end }}
+		</div>
+			{{ if eq .Section "musik"}}<div class="summary-cat">Musikgedöns</div>{{ end }}
+			{{ if eq .Section "zeichnungen"}}<div class="summary-cat">Zeichnung</div>{{ end }}
+			<!--{{ if eq .Section "blog"}}<div class="summary-cat">Prosa</div>{{ end }}-->
+	{{ end }}
+	<h2 class="summary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+	
+{{ if eq .Section "blog" "musik" "seiten" }}
+
+			{{ if eq .Params.truncate "0"}}
+				<div class="content">
+					{{ .Content }}
+				</div>
+			{{ else }}
+				<div class="content">
+					{{ .Content | truncate .Params.truncate}}<a href="{{ .RelPermalink }}"><b>weiterlesen »</b></a>
+				</div>
+			{{ end }}
+
+{{ end }}
+{{ if eq .Section "zeichnungen" }}
+	<div class="intro">
+		{{ if .Params.image }}
+			<img src="{{ .Params.image | relURL }}" />
+		{{ end }}
+	</div>
+{{ end }}
+</div>

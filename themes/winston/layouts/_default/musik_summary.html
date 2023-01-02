@@ -1,0 +1,19 @@
+{{ $jahr := .PublishDate.Format "2006" }}
+{{ $zeit := .Date | time.Format "15:04" }}
+<div class="summary">
+	{{ if .PublishDate }}
+		<div class="summary-date">
+			{{ .PublishDate.Format "2." }} {{ index .Site.Data.monate (.PublishDate.Format "1")}} {{ if le $jahr "2022" }}'{{ .PublishDate.Format "06"}}{{ end }}
+		</div>
+	{{ end }}
+	<h2 class="summary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+			{{ if eq .Params.truncate "0"}}
+				<div class="content">
+					{{ .Content }}
+				</div>
+			{{ else }}
+				<div class="content">
+					{{ .Content | truncate .Params.truncate}}<a href="{{ .RelPermalink }}"><b>weiterlesen »</b></a>
+				</div>
+			{{ end }}
+</div>
