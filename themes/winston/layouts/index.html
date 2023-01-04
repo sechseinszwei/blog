@@ -1,0 +1,12 @@
+{{ define "body_classes" }}page-home{{ end }}
+
+{{ define "main" }}
+  {{ $paginator := .Paginate (where .Site.Pages ".Params.state" "=" "feed") }}
+    {{ range $paginator.Pages }}
+      {{ .Render "summary" }}
+    {{ end }}
+    {{ partial "paginator" . }}
+  {{ end }}
+
+{{ define "footer_js" }}
+{{ end }}

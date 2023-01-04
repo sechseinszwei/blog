@@ -1,0 +1,18 @@
+{{ $jahr := .PublishDate.Format "2006" }}
+{{ $zeit := .Date | time.Format "15:04" }}
+<div class="summary">
+	{{ if .PublishDate }}
+		<div class="summary-date">
+			{{ .PublishDate.Format "2." }} {{ index .Site.Data.monate (.PublishDate.Format "1")}} {{ if le $jahr "2022" }}{{ .PublishDate.Format "2006"}}{{ end }}
+		</div>
+			<!--{{ if eq .Section "blog"}}<div class="summary-cat">Prosa</div>{{ end }}-->
+	{{ end }}
+	<h2 class="summary-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+
+
+				<div class="content">
+					{{ .Content }}
+				</div>
+
+
+</div>

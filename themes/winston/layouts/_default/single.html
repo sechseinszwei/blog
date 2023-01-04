@@ -1,0 +1,37 @@
+{{ define "body_classes" }}page-default-single{{ end }}
+
+{{ define "main" }}
+
+{{ $jahr := .PublishDate.Format "2006" }}
+{{ $zeit := .Date | time.Format "15:04" }}
+<div class="summary">
+{{ if .PublishDate }}
+		<div class="summary-date">
+			{{ .PublishDate.Format "2." }} {{ index .Site.Data.monate (.PublishDate.Format "1")}} {{ if le $jahr "2022" }}{{ .PublishDate.Format "2006"}}{{ end }}<!-- {{ if ne $zeit "00:00" }}, {{ .Date | time.Format "15:04" }} Uhr{{ end }}-->
+			<!-- #Tags{{ range (.GetTerms "tags") }} - <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>{{ end }}-->
+		</div>
+{{ end }}
+	<h2 class="summary-title">{{ .Title }}</h2>
+	
+	
+{{ if eq .Section "blog" "musik" "seiten" }}
+<div class="content">
+	{{ .Content }}
+</div>
+{{ end }}
+
+
+{{ if eq .Section "zeichnungen" }}
+<div class="intro">
+  {{ if .Params.image }}
+    <img src="{{ .Params.image | relURL }}" />
+  {{ end }}
+</div>
+{{ end }}
+
+
+</div>
+
+
+
+{{ end }}
