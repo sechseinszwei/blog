@@ -1,4 +1,0 @@
-+++
-layout = "zeichnungen"
-url = "zeichnungen"
-+++
